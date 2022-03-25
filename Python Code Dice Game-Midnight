@@ -1,0 +1,89 @@
+import random
+import sys
+
+#displaying rules of the game. 
+print("The rules of the game are as follow: \nOne player rolls at a time. \nAll six dice are rolled; the player must keep at least one. \nAny that the player does not keep are rerolled. \nThis procedure is then repeated until there are no more dice to roll. \nOnce kept, dice cannot be rerolled. \nPlayers must have kept a 1 and a 4, or they do not score. \nIf they have a 1 and 4, the other dice are totaled to give the player's score. \nThe maximum score is 24 (four 6s). \nThe procedure is repeated for the remaining players. \nThe player with the highest four-dice total wins.") 
+
+def MidnightDice():
+    
+    #Input for the number of players participating.
+    n = int(input("\n\nPleaae enter the number of players participating:  "))
+    
+    #Collecting names and player scores and storing them. 
+    scores_arr = [0]*n
+    names_arr = [""]*n
+    
+    
+    #For each player's turn, 'for' loop is used. 
+    for i in range(0,n):
+        
+        main=[]
+        mainKeep=[]
+        dice = 6
+        #Enter the name of the player. 
+        print("-------------------------------------");
+        print("Name of Player",i+1,": ")
+        names_arr[i]=input()
+        while dice != 0:
+                roll=int(input("Make a move:\n1. Roll the dice\n2. End the game\nMove: "))
+                if roll==1:
+                        outComes=[]
+                        for chance in range(dice):
+                                outComes.append(random.randrange(1,7))
+                        main.append(outComes)
+                        print("\n\t\t",outComes)
+                        keep=input("\nThese are the outcoumes. You can choose only ONE. Which one would you choose? :  ").split(" ")
+                        for choice in keep:
+                                if int(choice) in outComes:
+                                        mainKeep.append(int(choice))
+                                        dice-=1
+                                else:
+                                        print("The choice is Invalid")
+                                        exit()
+                        
+                if roll==2:
+                        exit()
+                        
+                if roll>2:
+                        print("The Option is Invalid")
+                        exit()
+                        
+                
+                        
+        print("\n\n\n\t\t",mainKeep)
+        
+        if 1 in mainKeep and 4 in mainKeep:
+                mainKeep.remove(1)
+                mainKeep.remove(4)
+                #Showing the score of the player. 
+                scores_arr[i] = sum(mainKeep)
+                print("\n\n\n"+names_arr[i]+"'s score is  ",sum(mainKeep))
+        
+        else:
+            #Changing the score of the player to 0.
+                print("Since you don't have any 1 and 4 in your choice, the choice can not be accepted. ")
+                scores_arr[i] = 0
+        
+    #Viewing the winner.  
+    max_score  = max(scores_arr)
+    count = 0
+    
+    #Checking similar maximum score or draw. 
+    for i in range(0,n):
+        if(scores_arr[i]==max_score):
+            count+=1
+            index = i
+    
+    if(count>1):
+        print("It's a draw! There are more than one player with the same score")
+    else:
+        print("The winner is player",index+1,"\nName of the player is:",names_arr[index],"\nScore of the player is:",max_score)
+                
+
+MidnightDice() 
+
+again = str(input("Do you want to play again (type yes or no): "))
+if again == "yes":
+    MidnightDice()
+else:
+    sys.exit(0)
