@@ -1,0 +1,32 @@
+Import random #import random module
+Import sys #import system module
+Print rules of the game
+Define MidnightDice():
+  Set the number of player participating. 
+  Store the number of players and score. 
+  For the number of players in range:
+    Prompt for player name
+    Prompt for making a choice to either roll the dice or end the game
+    For rolled dice
+      Show the outcomes
+      Prompt the user to choose atleast one outcome
+    For choice
+      If choice is in outcome
+        Store the choice
+      Else 
+        Print invalid choice
+Exit the game if player chooses to end the game
+Print invalid option if player selects anything out of the two option
+If 1 or 4 is in the chosen outcome
+  Print the total score
+Else
+  Print that there is no 1 or 4 in the choice
+If the sum of scores are same for 2 or more players
+  Print Draw
+Else
+  Print the winner name and score
+Prompt the players if they want to play again (Yes/No)
+If the answer is Yes
+  Start over
+Else
+  Exit the program
